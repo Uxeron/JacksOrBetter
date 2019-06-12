@@ -6,9 +6,9 @@ namespace JacksOrBetter
 {
     class HandEvaluator
     {
-        const string Symbols = "♠♥♦♣";
-        const string Numbers = "A23456789TJQK";
-        List< Card > hand;
+        private const string Symbols = "♠♥♦♣";
+        private const string Numbers = "A23456789TJQK";
+        private List< Card > hand;
         public HandEvaluator(List< Card > cards)
         {
             hand = cards;
@@ -46,7 +46,7 @@ namespace JacksOrBetter
             return ("Nothing", "0");
         }
 
-        bool IsFlush()
+        private bool IsFlush()
         {
             char symbol = hand[0].Symbol;
 
@@ -58,7 +58,7 @@ namespace JacksOrBetter
             return true;
         }
 
-        bool IsStraight()
+        private bool IsStraight()
         {
             List< int > numbers = new List< int > ();
 
@@ -72,13 +72,13 @@ namespace JacksOrBetter
             if (IsSequential(numbers))
                 return true;
             // 4/5 cards are sequential, and the 5th one is an Ace.
-            else if (numbers[0] == 0 && IsSequential(numbers.GetRange(1, numbers.Count - 1))) 
+            if (numbers[0] == 0 && IsSequential(numbers.GetRange(1, numbers.Count - 1))) 
                 return true;
             
             return false;
         }
 
-        bool IsSequential(List<int> numbers)
+        private bool IsSequential(List<int> numbers)
         {
             for(int i = 0; i < numbers.Count - 1; i++)
                 if (numbers[i] != numbers[i + 1] - 1)
@@ -87,7 +87,7 @@ namespace JacksOrBetter
             return true;
         }
 
-        bool AreBestCards()
+        private bool AreBestCards()
         {
             foreach (var card in hand)
             {
@@ -100,7 +100,7 @@ namespace JacksOrBetter
             return true;
         }
 
-        List< int > GetCountsOfNumbers()
+        private List< int > GetCountsOfNumbers()
         {
             var counts = new List<int>();
             for (int i = 0; i < Numbers.Length; i++)
@@ -112,12 +112,12 @@ namespace JacksOrBetter
             return counts;
         }
 
-        int MaxAmountOfSameNumbers()
+        private int MaxAmountOfSameNumbers()
         {
             return GetCountsOfNumbers().Max();
         }
 
-        int CountPairs()
+        private int CountPairs()
         {
             int pairs = 0;
 
@@ -128,37 +128,37 @@ namespace JacksOrBetter
             return pairs;
         }
 
-        bool IsRoyalFlush()
+        private bool IsRoyalFlush()
         {
             return (IsFlush() && IsStraight() && AreBestCards());
         }
 
-        bool IsStraightFlush()
+        private bool IsStraightFlush()
         {
             return (IsFlush() && IsStraight());
         }
 
-        bool IsFourOfAKind()
+        private bool IsFourOfAKind()
         {
             return (MaxAmountOfSameNumbers() == 4);
         }
 
-        bool IsFullHouse()
+        private bool IsFullHouse()
         {
             return (MaxAmountOfSameNumbers() == 1 && CountPairs() == 1);
         }
 
-        bool IsThreeOfAKind()
+        private bool IsThreeOfAKind()
         {
             return (MaxAmountOfSameNumbers() == 3);
         }
 
-        bool IsTwoPair()
+        private bool IsTwoPair()
         {
             return (CountPairs() == 2);
         }
 
-        bool IsJacksOrBetter()
+        private bool IsJacksOrBetter()
         {
             if (CountPairs() == 0)
                 return false;

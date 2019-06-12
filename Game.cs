@@ -5,13 +5,13 @@ namespace JacksOrBetter
 {
     class Game
     {
-        const int CardCount = 5;
-        const string Symbols = "♠♥♦♣";
-        const string Numbers = "A23456789TJQK";
+        private const int CardCount = 5;
+        private const string Symbols = "♠♥♦♣";
+        private const string Numbers = "A23456789TJQK";
 
         // Symbol, number/type.
-        List< Card > cards = new List< Card > {};
-        Random random = new Random();
+        private List< Card > cards = new List< Card > {};
+        private Random random = new Random();
 
         public void Run()
         {
@@ -22,14 +22,14 @@ namespace JacksOrBetter
             
             DrawCards();
 
-            List<int> parsedNumbers;
+            var parsedNumbers = new List<int>();
 
             // Read input until correct input is received.
             while (true)
             {
                 Console.WriteLine("Enter numbers of cards to discard (space separated): ");
 
-                if (GetInput(out parsedNumbers))
+                if (GetInput(parsedNumbers))
                     break;
 
                 Console.WriteLine("Error, invalid input");
@@ -50,8 +50,8 @@ namespace JacksOrBetter
         }
 
 
-        bool GetInput(out List< int > parsedNumbers) {
-            parsedNumbers = new List< int > ();
+        private bool GetInput(List< int > parsedNumbers) {
+            parsedNumbers.Clear();
             var input = Console.ReadLine().Trim().Split(" ");
             int parsedNumber;
 
@@ -68,18 +68,18 @@ namespace JacksOrBetter
                 // Check if input is a number.
                 if (!Int32.TryParse(number, out parsedNumber))
                     return false;
-                else
-                    // Make sure number is within bounds.
-                    if (1 > parsedNumber || parsedNumber > CardCount)
-                        return false;
-                    else
-                        parsedNumbers.Add(parsedNumber - 1);
+                
+                // Make sure number is within bounds.
+                if (1 > parsedNumber || parsedNumber > CardCount)
+                    return false;
+
+                parsedNumbers.Add(parsedNumber - 1);
             }
 
             return true;
         }
 
-        void DrawCards() 
+        private void DrawCards() 
         {
             // Clear the screen.
             Console.Clear();
