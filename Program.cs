@@ -9,7 +9,11 @@ namespace JacksOrBetter
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             var game = new Game();
-            game.Run();
+            do
+            {
+                game.Run();
+                Console.WriteLine("Press SPACE to play again");
+            } while (Console.ReadKey().KeyChar == ' ');
         }
     }
 }

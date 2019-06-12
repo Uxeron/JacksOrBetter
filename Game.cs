@@ -15,6 +15,7 @@ namespace JacksOrBetter
 
         public void Run()
         {
+            cards.Clear();
             // Generate cards.
             for (int i = 0; i < CardCount; i++)
                 cards.Add(new Card(Symbols[random.Next(Symbols.Length)], Numbers[random.Next(Numbers.Length)]));
@@ -42,6 +43,10 @@ namespace JacksOrBetter
 
             DrawCards();
 
+            var evaluator = new HandEvaluator(cards);
+            var values = evaluator.Evaluate();
+
+            Console.WriteLine("You drew {0} and won {1} coins", values.Item1, values.Item2);
         }
 
 
@@ -54,26 +59,13 @@ namespace JacksOrBetter
             {
                 // Check if input is a number.
                 if (Int32.TryParse(number, out parsedNumber))
-                {
-                    // Input is 1-based, change it to 0-based.
-                    parsedNumber--;
-
                     // Make sure number is within bounds.
-                    if (0 <= parsedNumber && parsedNumber < CardCount)
-                    {
-                        parsedNumbers.Add(parsedNumber);
-                    }
+                    if (0 < parsedNumber && parsedNumber <= CardCount)
+                        parsedNumbers.Add(parsedNumber - 1);
                     else
-                    {
-                        parsedNumbers.Clear();
                         return false;
-                    }
-                }
                 else
-                {
-                    parsedNumbers.Clear();
                     return false;
-                }
             }
 
             return true;
@@ -85,11 +77,6 @@ namespace JacksOrBetter
             Console.Clear();
 
             Console.WriteLine("Your current hand: ");
-
-            // Draw card indexes.
-            for (int i = 0; i < CardCount; i++)
-                Console.Write($"  {i+1}   ");
-            Console.WriteLine();
 
             // Draw top parts of all cards.
             foreach (var card in cards)
@@ -109,6 +96,11 @@ namespace JacksOrBetter
             // Draw bottom parts of all cards.
             foreach (var card in cards)
                 Console.Write(card.Bottom);
+            Console.WriteLine();
+
+            // Draw card indexes.
+            for (int i = 0; i < CardCount; i++)
+                Console.Write($"  {i + 1}   ");
             Console.WriteLine();
 
             Console.WriteLine();
