@@ -52,20 +52,28 @@ namespace JacksOrBetter
 
         bool GetInput(out List< int > parsedNumbers) {
             parsedNumbers = new List< int > ();
-            var input = Console.ReadLine().Split(" ");
+            var input = Console.ReadLine().Trim().Split(" ");
             int parsedNumber;
+
+            // No number was entered
+            if (input.Length == 0)
+                return false;
 
             foreach (var number in input)
             {
+                // Empty string, most likely an accidental spacebar press.
+                if (number.Length == 0)
+                    continue;
+                
                 // Check if input is a number.
-                if (Int32.TryParse(number, out parsedNumber))
-                    // Make sure number is within bounds.
-                    if (0 < parsedNumber && parsedNumber <= CardCount)
-                        parsedNumbers.Add(parsedNumber - 1);
-                    else
-                        return false;
-                else
+                if (!Int32.TryParse(number, out parsedNumber))
                     return false;
+                else
+                    // Make sure number is within bounds.
+                    if (1 > parsedNumber || parsedNumber > CardCount)
+                        return false;
+                    else
+                        parsedNumbers.Add(parsedNumber - 1);
             }
 
             return true;
