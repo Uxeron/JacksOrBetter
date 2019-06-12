@@ -1,0 +1,9 @@
+Royal Flush – This is a straight flush composed of the highest cards, such as 10, J, Q, K, A. 
+Straight Flush – This is a hand that is both a straight and a flush. For example, 5, 6, 7, 8, 9 of diamonds.
+Four of a Kind - This is a hand that contains four matching cards. For example, four 2s.
+Full House – This is a pair together with three of a kind, for example two tens and three kings. It doesn’t matter what suit the cards are, as long as they have the same value.
+Flush – This is a hand where all the cards are the same suit, for example, 4, 5, 7, K and A of clubs.
+Straight – This is a hand with five cards in sequence, for example 2, 3, 4, 5, 6. It doesn’t matter what the suit is and the Ace can be used at either the beginning or end of a sequence.
+Three of a Kind – This is a hand that contains three matching cards. For example, three 2s.
+Two Pair – This is hand containing two pairs, for example two 2s and two 4s.
+Jacks or Better - pair of jacks or better cards (Jacks, Queens, Kings, Aces)

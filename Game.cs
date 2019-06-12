@@ -35,7 +35,7 @@ namespace JacksOrBetter
             }
             
 
-            // Shuffle the selected cards
+            // Shuffle the selected cards.
             foreach (var number in parsedNumbers)
                 cards[number] = new Card(Symbols[random.Next(Symbols.Length)], Numbers[random.Next(Numbers.Length)]);
             
