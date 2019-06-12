@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace JacksOrBetter
 {
@@ -6,7 +7,9 @@ namespace JacksOrBetter
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+            var game = new Game();
+            game.Run();
         }
     }
 }
