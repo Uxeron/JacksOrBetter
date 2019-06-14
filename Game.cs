@@ -56,9 +56,9 @@ namespace JacksOrBetter
             DrawCards();
 
             var evaluator = new HandEvaluator(hand);
-            var values = evaluator.Evaluate();
+            Hand evaluatedHand = evaluator.Evaluate();
 
-            Console.WriteLine("You drew {0} and won {1} coins", values.Item1, values.Item2);
+            Console.WriteLine("You drew {0} and won {1} coins", evaluatedHand.Name, evaluatedHand.Value);
         }
 
 

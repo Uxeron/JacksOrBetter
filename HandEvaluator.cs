@@ -14,36 +14,36 @@ namespace JacksOrBetter
             hand = cards;
         }
 
-        public (string, string) Evaluate() 
+        public Hand Evaluate() 
         {
             if (IsRoyalFlush())
-                return ("a Royal Flush", "800");
+                return new RoyalFlush();
             
             if (IsStraightFlush())
-                return ("a Straight Flush", "50");
+                return new StraightFlush();
             
             if (IsFourOfAKind())
-                return ("a Four of a Kind", "25");
+                return new FourOfAKind();
             
             if (IsFullHouse())
-                return ("a Full House", "9");
+                return new FullHouse();
             
             if (IsFlush())
-                return ("a Flush", "6");
+                return new Flush();
             
             if (IsStraight())
-                return ("a Straight", "4");
+                return new Straight();
             
             if (IsThreeOfAKind())
-                return ("a Three of a Kind", "3");
+                return new ThreeOfAKind();
             
             if (IsTwoPair()) 
-                return ("a Two Pair", "2");
+                return new TwoPair();
             
             if (IsJacksOrBetter())
-                return ("a Jacks or Better", "1");
+                return new JacksOrBetter();
 
-            return ("Nothing", "0");
+            return new Nothing();
         }
 
         private bool IsFlush()
